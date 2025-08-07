@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人简历</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #9c4bff 0%, #2575fc 100%);
+            background-attachment: fixed;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(255,255,255,0.05) 50%, 
+                rgba(255,255,255,0.1) 100%);
+            z-index: -1;
+            border-radius: 25px;
+            animation: shine 8s infinite linear;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .profile {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
+            border-radius: 3px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            height: calc(100% - 20px);
+            width: 2px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-date {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .progress-label {
+            color: white;
+            font-size: 16px;
+        }
+
+        .progress-percent {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-value {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            position: relative;
+            transition: width 1.5s ease-out;
+        }
+
+        .progress-value::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .language-name {
+            color: white;
+            font-size: 16px;
+        }
+
+        .language-level {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .interest-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            width: calc(33.333% - 10px);
+            min-width: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .interest-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .interest-icon {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .interest-name {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .interest-item {
+                width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .glass-card {
+                padding: 20px;
+            }
+            
+            .interest-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧栏 -->
+        <div class="left-column">
+            <!-- 个人资料卡片 -->
+            <div class="glass-card profile">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80" alt="个人照片" class="profile-img">
+                <h1 class="name">XXX</h1>
+                <p class="title">学生</p>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+            
+            <!-- 联系信息 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">联系信息</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">+86 138 8888 8888</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">zhang@example.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">昆明XXX</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-text">www.zhangportfolio.com</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 技能 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">专业技能</h2>
+                <div class="skills">
+                    <div class="skill-tag">UI/UX设计</div>
+                    <div class="skill-tag">Figma</div>
+                    <div class="skill-tag">Adobe XD</div>
+                    <div class="skill-tag">HTML5/CSS3</div>
+                    <div class="skill-tag">JavaScript</div>
+                    <div class="skill-tag">React</div>
+                    <div class="skill-tag">Vue.js</div>
+                    <div class="skill-tag">响应式设计</div>
+                    <div class="skill-tag">动效设计</div>
+                    <div class="skill-tag">用户研究</div>
+                </div>
+            </div>
+            
+            <!-- 语言 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">语言能力</h2>
+                <div class="progress-container">
+                    <div class="progress-item">
+                        <div class="progress-info">
+                            <span class="progress-label">中文</span>
+                            <span class="progress-percent">母语</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-info">
+                            <span class="progress-label">英语</span>
+                            <span class="progress-percent">流利</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-info">
+                            <span class="progress-label">日语</span>
+                            <span class="progress-percent">中级</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 兴趣爱好 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">兴趣爱好</h2>
+                <div class="interests">
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="interest-name">摄影</div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="interest-name">阅读</div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-hiking"></i>
+                        </div>
+                        <div class="interest-name">徒步</div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <div class="interest-name">音乐</div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="interest-name">绘画</div>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="interest-name">游戏设计</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧栏 -->
+        <div class="right-column">
+            <!-- 关于我 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">关于我</h2>
+                <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    拥有8年经验的创意UI/UX设计师和前端开发工程师，专注于打造直观且视觉吸引人的数字体验。擅长将用户需求转化为优雅的界面设计，并通过代码实现。热爱探索新技术和设计趋势，致力于创造既美观又实用的解决方案。
+                    <br><br>
+                    在职业生涯中，我成功为金融、医疗、电商等多个行业的企业交付了超过50个数字产品项目。我相信优秀的设计是功能与美学的完美结合，始终以用户为中心，注重细节和整体体验。
+                </p>
+            </div>
+            
+            <!-- 工作经验 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">工作经验</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 至今</div>
+                        <h3 class="timeline-title">高级产品设计师</h3>
+                        <div class="timeline-subtitle">创新科技有限公司 · 北京</div>
+                        <p class="timeline-description">
+                            领导设计团队为B端企业客户开发SaaS产品。负责整体设计策略、用户研究、原型设计及设计系统开发。成功将用户满意度提升35%，产品采用率提升50%。
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2017 - 2020</div>
+                        <h3 class="timeline-title">UI/UX设计师</h3>
+                        <div class="timeline-subtitle">数字创意工场 · 上海</div>
+                        <p class="timeline-description">
+                            为国内外客户设计移动应用和网站界面。创建了5个以上设计系统，优化了设计工作流程，缩短项目交付时间30%。与开发团队紧密合作，确保设计完美落地。
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2015 - 2017</div>
+                        <h3 class="timeline-title">初级设计师</h3>
+                        <div class="timeline-subtitle">星云设计工作室 · 深圳</div>
+                        <p class="timeline-description">
+                            参与品牌设计、网站界面和营销材料制作。协助高级设计师完成项目，快速学习设计工具和工作流程，建立了坚实的设计基础。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 教育背景 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">教育背景</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2011 - 2015</div>
+                        <h3 class="timeline-title">数字媒体设计学士</h3>
+                        <div class="timeline-subtitle">中国美术学院 · 杭州</div>
+                        <p class="timeline-description">
+                            主修交互设计和数字媒体艺术，辅修前端开发。毕业设计获得学院创新奖，作品入选年度优秀毕业设计展。
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2008 - 2011</div>
+                        <h3 class="timeline-title">视觉传达设计</h3>
+                        <div class="timeline-subtitle">上海视觉艺术学院</div>
+                        <p class="timeline-description">
+                            学习平面设计基础、色彩理论和排版设计。参与多个校内外设计项目，培养了扎实的设计基本功。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 项目 -->
+            <div class="glass-card animate-on-scroll">
+                <h2 class="section-title">精选项目</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3 class="timeline-title">企业级数据分析平台</h3>
+                        <div class="timeline-subtitle">UI/UX设计 · 前端开发</div>
+                        <p class="timeline-description">
+                            为金融科技公司设计并开发的数据可视化平台。创建了自定义设计系统，优化了复杂数据的呈现方式，提升了用户决策效率40%。
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="timeline-title">医疗健康应用</h3>
+                        <div class="timeline-subtitle">产品设计 · 用户研究</div>
+                        <p class="timeline-description">
+                            面向老年用户的健康管理应用。通过深入的用户研究和无障碍设计，使应用在60岁以上用户群体中获得85%的满意度。
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="timeline-title">电子商务品牌重塑</h3>
+                        <div class="timeline-subtitle">品牌设计 · UI更新</div>
+                        <p class="timeline-description">
+                            领导时尚电商平台的品牌重塑项目，包括新Logo设计、品牌指南制定和全平台UI更新。上线后用户转化率提升28%。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // 进度条动画
+            const progressBars = document.querySelectorAll('.progress-value');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
