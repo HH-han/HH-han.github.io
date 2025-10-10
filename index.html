@@ -130,7 +130,11 @@
 				align-items: center;
 				margin-bottom: 15px;
 			}
-
+			
+			.border{
+				border-bottom: 3px dashed rgba(255, 255, 255, 0.4);
+			}
+			
 			.contact-item i,
 			.skill-item i {
 				margin-right: 15px;
@@ -147,6 +151,10 @@
 			
 			.skill-name-display{
 				flex-direction: column;
+			}
+			
+			.center{
+				align-items: center;
 			}
 			
 			.skill-bar {
@@ -418,7 +426,7 @@
 					
 					<div class="skills">
 						<h2>求职意向</h2>
-						<div class="skill-item">
+						<div class="skill-item border">
 							<div class="skill">
 								<div class="skill-name skill-name-display">
 									<h3>Java开发:</h3>
@@ -426,15 +434,40 @@
 									<span>使用Spring Boot框架构建后端服务。</span>
 									<span>与前端团队协作，完成API接口的设计与开发。</span>
 								</div>
+								<div class="skill-name center">
+									<h3>意向城市:</h3>
+									<span>昆明或其他</span>
+								</div>
+								<div class="skill-name center">
+									<h3>期望薪资:</h3>
+									<span>4.5k</span>
+								</div>
+								<div class="skill-name center">
+									<h3>求职类型:</h3>
+									<span>Java开发岗</span>
+								</div>
 							</div>
 						</div>
 						<div class="skill-item">
 							<div class="skill">
 								<div class="skill-name skill-name-display">
+									<h3>意向岗位:</h3>
 									<h3>vue.js开发:</h3>
 									<span>负责基于Vue.js框架的前端页面开发和交互设计。</span>
 									<span>与后端团队协作，完成前后端数据交互和接口对接。</span>
 									<span>使用Vue.js、Element-puls等框架和组件库构建用户界面。</span>
+								</div>
+								<div class="skill-name center">
+									<h3>意向城市:</h3>
+									<span>昆明或其他</span>
+								</div>
+								<div class="skill-name center">
+									<h3>期望薪资:</h3>
+									<span>4.5k</span>
+								</div>
+								<div class="skill-name center">
+									<h3>求职类型:</h3>
+									<span>vue.js开发岗</span>
 								</div>
 							</div>
 						</div>
@@ -510,7 +543,7 @@
 							<h3 class="degree">计算机应用技术 专科</h3>
 							<p class="university">云南农业职业技术学院</p>
 							<span class="date">2023年9月 - 2025年6月</span>
-							<p class="description">Java程序开发，vue.js项目开发</p>
+							<p class="description">web端 移动端程序开发</p>
 						</div>
 
 					</section>
@@ -671,8 +704,4 @@
 			})
 		</script>
 	</body>
-
 </html>
-
-
-
