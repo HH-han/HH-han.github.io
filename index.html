@@ -1,707 +1,551 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>个人简历</title>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
-			rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-		<style>
-			:root {
-				--primary-color: #3498db;
-				--secondary-color: #2c3e50;
-				--accent-color: #e74c3c;
-				--light-color: #ecf0f1;
-				--dark-color: #2c3e50;
-				--text-color: #333;
-				--text-light: #7f8c8d;
-				--shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-				--transition: all 0.3s ease;
-			}
-
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-
-			body {
-				font-family: 'Roboto', 'Noto Sans SC', sans-serif;
-				line-height: 1.6;
-				color: var(--text-color);
-				background-color: #f9f9f9;
-				padding: 0;
-				margin: 0;
-			}
-
-			.container {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 20px;
-			}
-
-			.resume {
-				display: grid;
-				grid-template-columns: 1fr 2fr;
-				gap: 30px;
-				background: white;
-				box-shadow: var(--shadow);
-				border-radius: 10px;
-				overflow: hidden;
-				margin: 30px auto;
-			}
-
-			.sidebar {
-				background: var(--secondary-color);
-				color: white;
-				padding: 40px;
-			}
-
-			.main-content {
-				padding: 40px;
-			}
-
-			.profile-img {
-				width: 150px;
-				height: 150px;
-				border-radius: 50%;
-				object-fit: cover;
-				border: 5px solid rgba(255, 255, 255, 0.2);
-				display: block;
-				margin: 0 auto 30px;
-			}
-
-			h1,
-			h2,
-			h3 {
-				margin-bottom: 15px;
-				font-weight: 700;
-			}
-
-			h1 {
-				font-size: 2.2rem;
-				color: white;
-				text-align: center;
-				margin-bottom: 10px;
-			}
-
-			h2 {
-				font-size: 1.5rem;
-				color: var(--primary-color);
-				position: relative;
-				padding-bottom: 10px;
-			}
-
-			h2::after {
-				content: '';
-				position: absolute;
-				left: 0;
-				bottom: 0;
-				width: 50px;
-				height: 3px;
-				background: var(--primary-color);
-			}
-
-			h3 {
-				font-size: 1.2rem;
-				margin-top: 20px;
-			}
-
-			.title {
-				color: var(--text-light);
-				font-weight: 400;
-				margin-bottom: 30px;
-				text-align: center;
-				font-size: 1.1rem;
-			}
-
-			.contact-info,
-			.skills,
-			.languages {
-				margin-bottom: 30px;
-			}
-
-			.contact-item,
-			.skill-item,
-			.language-item {
-				display: flex;
-				align-items: center;
-				margin-bottom: 15px;
-			}
-			
-			.border{
-				border-bottom: 3px dashed rgba(255, 255, 255, 0.4);
-			}
-			
-			.contact-item i,
-			.skill-item i {
-				margin-right: 15px;
-				color: var(--primary-color);
-				width: 20px;
-				text-align: center;
-			}
-
-			.skill-name {
-				margin-bottom: 5px;
-				display: flex;
-				justify-content: space-between;
-			}
-			
-			.skill-name-display{
-				flex-direction: column;
-			}
-			
-			.center{
-				align-items: center;
-			}
-			
-			.skill-bar {
-				height: 10px;
-				background: #ddd;
-				border-radius: 5px;
-				overflow: hidden;
-			}
-
-			.skill-level {
-				height: 100%;
-				background: var(--primary-color);
-				border-radius: 5px;
-			}
-
-			.language-name {
-				flex: 1;
-			}
-
-			.language-level {
-				color: var(--text-light);
-			}
-
-			.section {
-				margin-bottom: 40px;
-			}
-
-			.indent{
-				text-indent: 2em;
-			}
-
-			.experience-item,
-			.education-item {
-				margin-bottom: 25px;
-				position: relative;
-				padding-left: 30px;
-			}
-
-			.experience-item::before,
-			.education-item::before {
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 5px;
-				width: 15px;
-				height: 15px;
-				border-radius: 50%;
-				background: var(--primary-color);
-			}
-
-			.experience-item::after,
-			.education-item::after {
-				content: '';
-				position: absolute;
-				left: 7px;
-				top: 20px;
-				bottom: -25px;
-				width: 1px;
-				background: #ddd;
-			}
-
-			.experience-item:last-child::after,
-			.education-item:last-child::after {
-				display: none;
-			}
-
-			.job-title,
-			.degree {
-				font-weight: 500;
-				margin-bottom: 5px;
-			}
-
-			.company,
-			.university {
-				color: var(--primary-color);
-				margin-bottom: 5px;
-			}
-
-			.date {
-				color: var(--text-light);
-				font-size: 0.9rem;
-				margin-bottom: 10px;
-				display: block;
-			}
-
-			.description {
-				margin-bottom: 10px;
-			}
-
-			.projects {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-				gap: 20px;
-			}
-
-			.project-card {
-				background: var(--light-color);
-				padding: 20px;
-				border-radius: 5px;
-				transition: var(--transition);
-			}
-
-			.project-card:hover {
-				transform: translateY(-5px);
-				box-shadow: var(--shadow);
-			}
-
-			.project-title {
-				font-weight: 500;
-				margin-bottom: 10px;
-				color: var(--dark-color);
-			}
-
-			.project-description {
-				font-size: 0.9rem;
-				color: var(--text-light);
-			}
-
-			.social-links {
-				display: flex;
-				justify-content: center;
-				margin-top: 20px;
-			}
-
-			.social-links a {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				width: 40px;
-				height: 40px;
-				border-radius: 50%;
-				background: rgba(255, 255, 255, 0.1);
-				color: white;
-				margin: 0 10px;
-				transition: var(--transition);
-			}
-
-			.social-links a:hover {
-				background: var(--primary-color);
-				transform: translateY(-3px);
-			}
-
-			@media (max-width: 768px) {
-				.resume {
-					grid-template-columns: 1fr;
-				}
-
-				.sidebar {
-					padding: 30px;
-				}
-
-				.main-content {
-					padding: 30px;
-				}
-
-				.profile-img {
-					width: 120px;
-					height: 120px;
-				}
-			}
-
-			.particles {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				z-index: -1;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="resume">
-				<aside class="sidebar">
-					<img src="头像.png" alt="汉贺军" class="profile-img">
-					<h1>汉贺军</h1>
-					<p class="title">前端开发岗位</p>
-
-					<div class="contact-info">
-						<h2>联系方式</h2>
-						<div class="contact-item">
-							<i class="fas fa-phone"></i>
-							<span>18213200129</span>
-						</div>
-						<div class="contact-item">
-							<i class="fas fa-envelope"></i>
-							<span>2560177364@qq.com</span>
-						</div>
-						<div class="contact-item">
-							<i class="fas fa-map-marker-alt"></i>
-							<span>云南昆明</span>
-						</div>
-						<div class="contact-item">
-							<i class="fab fa-github"></i>
-							<span>https://github.com/HH-han/springboot-server</span>
-						</div>
-					</div>
-
-					<div class="skills">
-						<h2>技能专长</h2>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name">
-									<span>HTML/CSS</span>
-									<span>95%</span>
-								</div>
-								<div class="skill-bar">
-									<div class="skill-level" style="width: 95%"></div>
-								</div>
-							</div>
-						</div>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name">
-									<span>JavaScript</span>
-									<span>90%</span>
-								</div>
-								<div class="skill-bar">
-									<div class="skill-level" style="width: 90%"></div>
-								</div>
-							</div>
-						</div>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name">
-									<span>Vue.js</span>
-									<span>80%</span>
-								</div>
-								<div class="skill-bar">
-									<div class="skill-level" style="width: 80%"></div>
-								</div>
-							</div>
-						</div>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name">
-									<span>Java</span>
-									<span>75%</span>
-								</div>
-								<div class="skill-bar">
-									<div class="skill-level" style="width: 75%"></div>
-								</div>
-							</div>
-						</div>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name">
-									<span>Spring-boot</span>
-									<span>65%</span>
-								</div>
-								<div class="skill-bar">
-									<div class="skill-level" style="width: 65%"></div>
-								</div>
-							</div>
-						</div>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name">
-									<span>Node.js</span>
-									<span>75%</span>
-								</div>
-								<div class="skill-bar">
-									<div class="skill-level" style="width: 75%"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="skills">
-						<h2>求职意向</h2>
-						<div class="skill-item border">
-							<div class="skill">
-								<div class="skill-name skill-name-display">
-									<h3>Java开发:</h3>
-									<span>负责基于Java技术栈的后端系统设计与开发。</span>
-									<span>使用Spring Boot框架构建后端服务。</span>
-									<span>与前端团队协作，完成API接口的设计与开发。</span>
-								</div>
-								<div class="skill-name center">
-									<h3>意向城市:</h3>
-									<span>昆明或其他</span>
-								</div>
-								<div class="skill-name center">
-									<h3>期望薪资:</h3>
-									<span>4.5k</span>
-								</div>
-								<div class="skill-name center">
-									<h3>求职类型:</h3>
-									<span>Java开发岗</span>
-								</div>
-							</div>
-						</div>
-						<div class="skill-item">
-							<div class="skill">
-								<div class="skill-name skill-name-display">
-									<h3>意向岗位:</h3>
-									<h3>vue.js开发:</h3>
-									<span>负责基于Vue.js框架的前端页面开发和交互设计。</span>
-									<span>与后端团队协作，完成前后端数据交互和接口对接。</span>
-									<span>使用Vue.js、Element-puls等框架和组件库构建用户界面。</span>
-								</div>
-								<div class="skill-name center">
-									<h3>意向城市:</h3>
-									<span>昆明或其他</span>
-								</div>
-								<div class="skill-name center">
-									<h3>期望薪资:</h3>
-									<span>4.5k</span>
-								</div>
-								<div class="skill-name center">
-									<h3>求职类型:</h3>
-									<span>vue.js开发岗</span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="languages">
-						<h2>语言能力</h2>
-						<div class="language-item">
-							<span class="language-name">中文</span>
-							<span class="language-level">母语</span>
-						</div>
-					</div>
-
-					<div class="social-links">
-						<a href="https://github.com/HH-han"><i class="fab fa-github"></i></a>
-						<a href="#"><i class="fab fa-weixin"></i></a>
-					</div>
-				</aside>
-
-				<main class="main-content">
-					<section class="section">
-						<h2>个人简介</h2>
-						<p class="indent">我系统地掌握了多种编程语言和技术框架，具备扎实的 HTML 基础，能够熟练运用 HTML5 构建网页结构，实现页面布局与交互效果。我熟悉 Vue.js
-							框架，能够运用其组件化开发模式快速搭建前端应用，实现数据绑定、事件处理与动态渲染等功能。同时，我也掌握了 Node.js 运行环境，能够使用 JavaScript
-							进行服务器端开发，构建高效的后端服务。在后端开发方面，我熟练掌握 Java 语言，具备良好的面向对象编程思想，能够运用 Spring Boot
-							框架快速搭建应用，实现业务逻辑处理、数据持久化与接口交互等功能。
-							我具备良好的团队合作精神，曾参与小组或个人项目，与团队成员密切协作，共同攻克技术难题，按时完成项目任务。在项目中，我负责前端页面开发、后端接口设计与数据交互等工作，积累了丰富的实践经验。同时，我也注重自我提升，通过在线课程、技术论坛等方式不断学习新技术，拓宽知识面。
-							我渴望在计算机应用技术领域开启我的职业生涯，我相信我的专业知识、实践能力和学习热情将使我成为贵公司的优秀实习生。期待能加入贵公司，在实习中不断成长，为公司的发展贡献自己的力量。</p>
-					</section>
-
-					<section class="section">
-						<h2>项目简介：</h2>
-						<div class="experience-item">
-						    <h3 class="job-title">项目一：[爱旅]</h3>
-						    <p class="company">[团队：] · [五人团队开发]</p>
-						    <span class="date">[2024-6] - [2024-6-25]</span>
-						    <p class="description">负责项目的前端客户端相关内容编写。</p>
-						    <ul>
-						        <li>Spring-boot框架和MyBatis完成数据持久化操作。</li>
-						        <li>结合 Vue.js 前端框架，开发用户界面，实现数据可视化和交互功能。</li>
-						        <li>优化前端数据加载逻辑，解决数据渲染缓慢问题。</li>
-						    </ul>
-						</div>
-						
-					    <div class="experience-item">
-					        <h3 class="job-title">项目二：[博览旅行]</h3>
-					        <p class="company">[团队：] · [个人开发]</p>
-					        <span class="date">[2024-12] - [2025-1]</span>
-					        <p class="description">多个业务线的前端，后端开发工作，包括客户端和管理后台。</p>
-					        <ul>
-					            <li>使用 Vue.js 开发商家管理后台，提高运营效率。</li>
-					            <li>实现客户端与用户的良好交互，实现对旅游相关内容的浏览，预订，支付等功能。</li>
-					            <li>个人全权负责项目前端后端开发调试。</li>
-					        </ul>
-					    </div>
-					
-					    <div class="experience-item">
-					        <h3 class="job-title">项目三：[农村农户-果树田间管理平台]</h3>
-					        <p class="company">[团队：] · [个人开发]</p>
-					        <span class="date">[2025-8] - [2025-9]</span>
-					        <p class="description">参与项目核心产品的后端开发工作，负责业务逻辑处理和数据持久化。</p>
-					        <ul>
-					            <li>使用 Java 和 Spring Boot 框架搭建后端服务，实现业务逻辑处理和数据交互。</li>
-					            <li>使用vue.js框架搭建前端管理，负责数据渲染和交互逻辑</li>
-					            <li>编写单元测试和集成测试，确保代码质量。</li>
-					        </ul>
-					    </div>
-					</section>
-
-					<section class="section">
-						<h2>教育背景</h2>
-						<div class="education-item">
-							<h3 class="degree">计算机应用技术 专科</h3>
-							<p class="university">云南农业职业技术学院</p>
-							<span class="date">2023年9月 - 2025年6月</span>
-							<p class="description">web端 移动端程序开发</p>
-						</div>
-
-					</section>
-
-					<section class="section">
-						<h2>项目经验</h2>
-						<div class="projects">
-							<div class="project-card">
-								<h3 class="project-title">旅游平台(博览)</h3>
-								<p class="project-description indent">
-									前端端技术栈:基于Vue和Element-puls开发的在线旅游订票系统，包含权限管理、数据可视化，后台管理等功能。</p>
-								<p class="project-description indent">后端技术栈:Spring-boot(jak21 mybatis-puls mysql websocket
-									Spring Security + JWT redis)</p>
-								<p class="project-description indent">开发工具:VS-code IDEA</p>
-							</div>
-							<div class="project-card">
-								<h3 class="project-title">农村农户-果树田间管理平台</h3>
-								<p class="project-description indent">前端技术栈:使用Vue.js开发的农户-果树管理平台。</p>
-								<p class="project-description indent">后端技术栈:Spring-boot(jak21 mybatis-puls Security + JWT(鉴权))</p>
-								<p class="project-description indent">开发工具:VS-code IDEA</p>
-							</div>
-							<div class="project-card">
-								<h3 class="project-title">即时通信</h3>
-								<p class="project-description indent">前端技术栈:使用Vue.js开发的即时通信前端。</p>
-								<p class="project-description indent">后端技术栈:Spring-boot(jak21 mybatis-puls mysql websocket
-									Spring Security + JWT redis)</p>
-								<p class="project-description indent">开发工具:VS-code IDEA</p>
-							</div>
-							<div class="project-card">
-								<h3 class="project-title">旅游平台(爱旅)</h3>
-								<p class="project-description indent">后端技术栈:Spring-boot(jak8 mysql Spring Security + JWT)</p>
-								<p class="project-description indent">开发工具:IDEA</p>
-							</div>
-						</div>
-					</section>
-				</main>
-			</div>
-		</div>
-		<canvas class="particles" id="particles-canvas"></canvas>
-		<script>
-			// 粒子系统
-			class Particle {
-				constructor(canvas) {
-					this.canvas = canvas
-					this.ctx = canvas.getContext('2d')
-					this.x = Math.random() * canvas.width
-					this.y = Math.random() * canvas.height
-					this.size = Math.random() * 3 + 1
-					this.speedX = Math.random() * 2 - 1
-					this.speedY = Math.random() * 2 - 1
-					this.color = `hsl(${Math.random() * 60 + 180}, 80%, 60%)`
-					this.alpha = Math.random() * 0.5 + 0.1
-				}
-
-				update() {
-					this.x += this.speedX
-					this.y += this.speedY
-
-					if (this.x > this.canvas.width || this.x < 0) {
-						this.speedX = -this.speedX
-					}
-
-					if (this.y > this.canvas.height || this.y < 0) {
-						this.speedY = -this.speedY
-					}
-				}
-
-				draw() {
-					this.ctx.globalAlpha = this.alpha
-					this.ctx.fillStyle = this.color
-					this.ctx.beginPath()
-					this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-					this.ctx.fill()
-				}
-			}
-
-			// 主程序
-			document.addEventListener('DOMContentLoaded', () => {
-				const canvas = document.getElementById('particles-canvas')
-				let particles = []
-				let animationId = null
-
-				// 初始化粒子
-				const initParticles = () => {
-					const particleCount = Math.floor(window.innerWidth / 10)
-					particles = []
-
-					for (let i = 0; i < particleCount; i++) {
-						particles.push(new Particle(canvas))
-					}
-				}
-
-				// 绘制连接线
-				const drawConnections = () => {
-					const ctx = canvas.getContext('2d')
-					const maxDistance = 100
-
-					for (let i = 0; i < particles.length; i++) {
-						for (let j = i; j < particles.length; j++) {
-							const dx = particles[i].x - particles[j].x
-							const dy = particles[i].y - particles[j].y
-							const distance = Math.sqrt(dx * dx + dy * dy)
-
-							if (distance < maxDistance) {
-								const opacity = 1 - distance / maxDistance
-								ctx.strokeStyle = `rgba(150, 200, 255, ${opacity * 0.3})`
-								ctx.lineWidth = 1
-								ctx.beginPath()
-								ctx.moveTo(particles[i].x, particles[i].y)
-								ctx.lineTo(particles[j].x, particles[j].y)
-								ctx.stroke()
-							}
-						}
-					}
-				}
-
-				// 动画循环
-				const animate = () => {
-					const ctx = canvas.getContext('2d')
-					ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-					// 绘制连接线
-					drawConnections()
-
-					// 更新并绘制粒子
-					particles.forEach(particle => {
-						particle.update()
-						particle.draw()
-					})
-
-					animationId = requestAnimationFrame(animate)
-				}
-
-				// 调整画布大小
-				const resizeCanvas = () => {
-					canvas.width = window.innerWidth
-					canvas.height = window.innerHeight
-					initParticles()
-				}
-
-				// 初始化
-				resizeCanvas()
-				window.addEventListener('resize', resizeCanvas)
-				animate()
-
-				// 为盒子添加悬停效果
-				const boxes = document.querySelectorAll('.animated-box')
-				boxes.forEach(box => {
-					box.addEventListener('mouseenter', () => {
-						const hue = box.style.getPropertyValue('--hue')
-						box.style.background = `rgba(${hue}, 100, 150, 0.2)`
-					})
-
-					box.addEventListener('mouseleave', () => {
-						box.style.background = 'rgba(255, 255, 255, 0.1)'
-					})
-				})
-			})
-		</script>
-	</body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>🍬 小糖博客 · 可爱单页</title>
+  <!-- 使用 Google Font 可爱字体 & Font Awesome 图标库 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* 全局重置 & 可爱风格 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(145deg, #fdeff2 0%, #fff5f7 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+      color: #4a3b3f;
+    }
+
+    /* 主卡片 —— 圆润蓬松 */
+    .blog-card {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(255, 248, 250, 0.75);
+      backdrop-filter: blur(4px);
+      border-radius: 60px 60px 40px 40px;
+      box-shadow: 0 20px 40px rgba(241, 154, 170, 0.25),
+                  0 8px 16px rgba(255, 200, 210, 0.3),
+                  inset 0 2px 4px rgba(255, 255, 255, 0.8);
+      padding: 2rem 2rem 1.5rem;
+      transition: all 0.2s ease;
+      border: 2px solid #ffe2e9;
+    }
+
+    /* ===== 导航栏 ===== */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.8rem;
+      border-bottom: 3px dashed #ffcad4;
+      margin-bottom: 1.8rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #d65f7c;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .logo i {
+      font-size: 2rem;
+      color: #f28b9e;
+      transform: rotate(-6deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #7a5b64;
+      font-size: 1.1rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 30px;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .nav-links a i {
+      margin-right: 6px;
+      color: #e68a9e;
+    }
+    .nav-links a:hover {
+      background: #ffe2ec;
+      color: #b34d67;
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(255, 140, 170, 0.2);
+    }
+
+    /* ===== 头像 & 介绍 ===== */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 2.8rem;
+      background: rgba(255, 235, 240, 0.5);
+      border-radius: 80px 30px 30px 80px;
+      padding: 1.2rem 2rem 1.2rem 1.8rem;
+      backdrop-filter: blur(2px);
+      border: 1px solid #ffd9e3;
+    }
+
+    .avatar {
+      flex-shrink: 0;
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(135deg, #ffb6c9, #ff8aa8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.2rem;
+      color: white;
+      box-shadow: 0 12px 18px rgba(255, 100, 130, 0.3);
+      border: 4px solid #fff5f7;
+      transition: 0.2s;
+    }
+    .avatar i {
+      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+    .hero-text h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #4f2e3a;
+      letter-spacing: -0.3px;
+    }
+    .hero-text h1 i {
+      color: #f28b9e;
+      margin-right: 8px;
+    }
+    .hero-text .tagline {
+      font-size: 1.1rem;
+      background: #ffeef2;
+      display: inline-block;
+      padding: 0.3rem 1.4rem;
+      border-radius: 40px;
+      margin-top: 6px;
+      color: #954f64;
+      font-weight: 600;
+      border: 1px solid #ffd2de;
+      backdrop-filter: blur(2px);
+    }
+    .hero-text p {
+      margin-top: 12px;
+      color: #5d424b;
+      font-weight: 500;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+    }
+
+    /* ===== 博客文章网格 ===== */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 2.2rem 0 1.5rem 0;
+    }
+    .section-title i {
+      font-size: 2rem;
+      color: #e2738f;
+    }
+    .section-title h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #482e36;
+      letter-spacing: -0.3px;
+    }
+    .section-title span {
+      background: #ffd9e3;
+      border-radius: 40px;
+      padding: 0.1rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #984f65;
+      margin-left: 6px;
+    }
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .post-card {
+      background: rgba(255, 250, 251, 0.7);
+      backdrop-filter: blur(2px);
+      border-radius: 40px 40px 30px 30px;
+      padding: 1.2rem 1.5rem 1.5rem;
+      box-shadow: 0 8px 18px rgba(255, 150, 180, 0.15);
+      border: 2px solid #ffe3eb;
+      transition: 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: #fbb0c5;
+      box-shadow: 0 20px 28px rgba(255, 130, 165, 0.25);
+      background: rgba(255, 245, 248, 0.9);
+    }
+
+    .post-category {
+      display: inline-block;
+      background: #ffe2ec;
+      border-radius: 40px;
+      padding: 0.2rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #b34d67;
+      letter-spacing: 0.3px;
+      align-self: flex-start;
+      margin-bottom: 10px;
+      border: 1px solid #ffc4d4;
+    }
+
+    .post-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #39262d;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .post-card h3 i {
+      color: #e2738f;
+      margin-right: 6px;
+      font-size: 1rem;
+    }
+
+    .post-meta {
+      font-size: 0.85rem;
+      color: #896a74;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 6px 0 12px 0;
+      border-top: 1px dashed #fccfd9;
+      padding-top: 8px;
+    }
+    .post-meta i {
+      color: #db7f96;
+      width: 18px;
+    }
+
+    .post-excerpt {
+      color: #523e45;
+      font-weight: 500;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .read-more {
+      text-decoration: none;
+      font-weight: 700;
+      color: #b34d67;
+      background: #ffdee9;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      align-self: flex-start;
+      font-size: 0.9rem;
+      border: 1px solid #ffbccf;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .read-more i {
+      font-size: 0.8rem;
+    }
+    .read-more:hover {
+      background: #ffcbd9;
+      color: #872f4b;
+      border-color: #e68a9e;
+      box-shadow: 0 4px 8px rgba(255, 100, 130, 0.2);
+    }
+
+    /* ===== 侧边栏 / 个人简介卡片 ===== */
+    .profile-side {
+      background: rgba(255, 240, 244, 0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 50px 20px 50px 20px;
+      padding: 1.5rem 2rem;
+      margin: 1.8rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 2px solid #ffdae4;
+    }
+    .profile-side .info {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .profile-side .info i {
+      font-size: 2.2rem;
+      color: #dd7d96;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px rgba(255, 120, 150, 0.15);
+    }
+    .profile-side .info .bio {
+      font-weight: 600;
+      color: #452e36;
+    }
+    .profile-side .info .bio span {
+      background: #ffdae4;
+      padding: 0.1rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      margin-left: 8px;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      font-size: 1.7rem;
+    }
+    .social-icons a {
+      color: #a35f73;
+      transition: 0.2s;
+      background: rgba(255, 255, 255, 0.5);
+      width: 48px;
+      height: 48px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1px solid #ffc9d7;
+    }
+    .social-icons a:hover {
+      color: #c44e6b;
+      background: #ffe3ec;
+      transform: scale(1.08) rotate(-2deg);
+      border-color: #f28b9e;
+    }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      margin-top: 2.2rem;
+      text-align: center;
+      color: #906a76;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-top: 3px dashed #ffd3de;
+      padding-top: 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer i {
+      color: #e2738f;
+      margin: 0 6px;
+    }
+    .footer .heart {
+      color: #f45b7a;
+      animation: beat 1.8s infinite;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* 小屏适配 */
+    @media (max-width: 650px) {
+      .blog-card { padding: 1.5rem; }
+      .hero { flex-direction: column; text-align: center; border-radius: 50px; padding: 1.8rem; }
+      .hero-text h1 { font-size: 1.8rem; }
+      .profile-side { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .social-icons { align-self: center; }
+      .nav-links { gap: 0.8rem; margin-top: 0.4rem; }
+    }
+    @media (max-width: 450px) {
+      .post-grid { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+<div class="blog-card">
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="logo">
+      <i class="fas fa-cat"></i> 小糖·窝
+    </div>
+    <div class="nav-links">
+      <a href="#"><i class="fas fa-house"></i> 首页</a>
+      <a href="#"><i class="fas fa-pen-fancy"></i> 文章</a>
+      <a href="#"><i class="fas fa-tag"></i> 标签</a>
+      <a href="#"><i class="fas fa-heart"></i> 关于</a>
+    </div>
+  </nav>
+
+  <!-- 头部 hero -->
+  <div class="hero">
+    <div class="avatar">
+      <i class="fas fa-paw"></i>
+    </div>
+    <div class="hero-text">
+      <h1><i class="fas fa-star"></i> 奶油小星</h1>
+      <div class="tagline"><i class="fas fa-cloud-sun"></i> 今天也是软糯的一天</div>
+      <p><i class="fas fa-map-pin"></i> 记录日常 · 分享可爱</p>
+    </div>
+  </div>
+
+  <!-- 文章区域 -->
+  <div class="section-title">
+    <i class="fas fa-pencil-alt"></i>
+    <h2>最新小记</h2>
+    <span>🍰 6 篇</span>
+  </div>
+
+  <div class="post-grid">
+    <!-- 卡片 1 -->
+    <div class="post-card">
+      <span class="post-category"><i class="fas fa-cookie"></i> 日常</span>
+      <h3><i class="fas fa-mug-saucer"></i> 下午茶与云朵</h3>
+      <div class="post-meta">
+        <span><i class="far fa-calendar"></i> 2026-06-27</span>
+        <span><i class="far fa-comment"></i> 12</span>
+      </div>
+      <div class="post-excerpt">
+        今天烤了奶油曲奇，配着蜜桃乌龙，窗外的云像棉花糖一样软。生活需要一点甜～
+      </div>
+      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 卡片 2 -->
+    <div class="post-card">
+      <span class="post-category"><i class="fas fa-palette"></i> 手作</span>
+      <h3><i class="fas fa-scroll"></i> 拼贴诗·春日</h3>
+      <div class="post-meta">
+        <span><i class="far fa-calendar"></i> 2026-06-24</span>
+        <span><i class="far fa-comment"></i> 8</span>
+      </div>
+      <div class="post-excerpt">
+        用旧杂志和干花做了一页拼贴诗，粉色和绿色撞在一起，是春天打翻的调色盘。
+      </div>
+      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 卡片 3 -->
+    <div class="post-card">
+      <span class="post-category"><i class="fas fa-cat"></i> 萌宠</span>
+      <h3><i class="fas fa-cat"></i> 橘子今天打哈欠</h3>
+      <div class="post-meta">
+        <span><i class="far fa-calendar"></i> 2026-06-20</span>
+        <span><i class="far fa-comment"></i> 24</span>
+      </div>
+      <div class="post-excerpt">
+        我家橘猫「年糕」又占领了我的键盘，还打了一个超级大的哈欠，萌化了！🐾
+      </div>
+      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 卡片 4 -->
+    <div class="post-card">
+      <span class="post-category"><i class="fas fa-book-open"></i> 读书</span>
+      <h3><i class="fas fa-feather"></i> 翻开《小王子》</h3>
+      <div class="post-meta">
+        <span><i class="far fa-calendar"></i> 2026-06-16</span>
+        <span><i class="far fa-comment"></i> 15</span>
+      </div>
+      <div class="post-excerpt">
+        “如果你驯养了我，我们就会彼此需要。” 每次读都有新的感动，玫瑰与狐狸。
+      </div>
+      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 卡片 5 -->
+    <div class="post-card">
+      <span class="post-category"><i class="fas fa-music"></i> 音乐</span>
+      <h3><i class="fas fa-headphones"></i> 初夏歌单</h3>
+      <div class="post-meta">
+        <span><i class="far fa-calendar"></i> 2026-06-10</span>
+        <span><i class="far fa-comment"></i> 9</span>
+      </div>
+      <div class="post-excerpt">
+        收录了十首轻快又带点慵懒的曲子，适合在傍晚骑车或者发呆时听。🎶
+      </div>
+      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <!-- 卡片 6 -->
+    <div class="post-card">
+      <span class="post-category"><i class="fas fa-camera"></i> 摄影</span>
+      <h3><i class="fas fa-image"></i> 收集粉色黄昏</h3>
+      <div class="post-meta">
+        <span><i class="far fa-calendar"></i> 2026-06-05</span>
+        <span><i class="far fa-comment"></i> 31</span>
+      </div>
+      <div class="post-excerpt">
+        连续一周的粉色晚霞，像是天空在喝草莓奶昔。用镜头留住这些温柔时刻。
+      </div>
+      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <!-- 侧边简介 / 社交 -->
+  <div class="profile-side">
+    <div class="info">
+      <i class="fas fa-otter"></i>
+      <div class="bio">
+        一只住在云端的博客小狸 <span>🐾 日常可爱</span>
+        <div style="font-weight: 400; font-size:0.9rem; margin-top: 4px;">
+          <i class="fas fa-map-marker-alt" style="color:#d46b83;"></i> 彩虹糖星球 · 下午茶区
+        </div>
+      </div>
+    </div>
+    <div class="social-icons">
+      <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
+      <a href="#" aria-label="小红书"><i class="fab fa-xiaohongshu"></i></a>
+      <a href="#" aria-label="bilibili"><i class="fab fa-bilibili"></i></a>
+      <a href="#" aria-label="github"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <span><i class="fas fa-copyright"></i> 2026 小糖博客 · 用 <i class="fas fa-mug-hot"></i> 和 <i class="fas fa-heart heart"></i> 搭建</span>
+    <span>
+      <i class="fas fa-tag"></i> 可爱至上 · 
+      <i class="fas fa-code"></i> 单页博客
+    </span>
+  </div>
+
+</div>
+<!-- 完 ～ 希望你喜欢这份可爱！ -->
+</body>
 </html>
