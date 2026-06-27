@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>🍬 小糖博客 · 可爱单页</title>
-  <!-- 使用 Google Font 可爱字体 & Font Awesome 图标库 -->
+  <title>🍬 小糖博客 · 完整四页</title>
+  <!-- Google Font & Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* 全局重置 & 可爱风格 */
+    /* === 全局重置 & 可爱风格 === */
     * {
       margin: 0;
       padding: 0;
@@ -27,22 +27,19 @@
       color: #4a3b3f;
     }
 
-    /* 主卡片 —— 圆润蓬松 */
     .blog-card {
-      max-width: 1000px;
+      max-width: 1100px;
       width: 100%;
       background: rgba(255, 248, 250, 0.75);
       backdrop-filter: blur(4px);
       border-radius: 60px 60px 40px 40px;
-      box-shadow: 0 20px 40px rgba(241, 154, 170, 0.25),
-                  0 8px 16px rgba(255, 200, 210, 0.3),
-                  inset 0 2px 4px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px rgba(241, 154, 170, 0.25), 0 8px 16px rgba(255, 200, 210, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.8);
       padding: 2rem 2rem 1.5rem;
-      transition: all 0.2s ease;
       border: 2px solid #ffe2e9;
+      transition: all 0.2s;
     }
 
-    /* ===== 导航栏 ===== */
+    /* === 导航栏 === */
     .navbar {
       display: flex;
       flex-wrap: wrap;
@@ -57,7 +54,6 @@
       font-size: 1.8rem;
       font-weight: 700;
       color: #d65f7c;
-      letter-spacing: -0.5px;
       display: flex;
       align-items: center;
       gap: 0.3rem;
@@ -70,7 +66,7 @@
 
     .nav-links {
       display: flex;
-      gap: 1.8rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
     }
     .nav-links a {
@@ -78,23 +74,46 @@
       font-weight: 600;
       color: #7a5b64;
       font-size: 1.1rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 30px;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
       transition: all 0.2s;
       background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 2px solid transparent;
     }
     .nav-links a i {
-      margin-right: 6px;
       color: #e68a9e;
     }
     .nav-links a:hover {
       background: #ffe2ec;
       color: #b34d67;
-      transform: scale(1.03);
-      box-shadow: 0 4px 8px rgba(255, 140, 170, 0.2);
+      transform: scale(1.02);
+      border-color: #ffbccf;
+    }
+    .nav-links a.active {
+      background: #ffdae4;
+      color: #a5435d;
+      border-color: #f59aaf;
+      box-shadow: 0 4px 10px rgba(255, 120, 150, 0.2);
     }
 
-    /* ===== 头像 & 介绍 ===== */
+    /* === 页面容器 (显示/隐藏) === */
+    .page {
+      display: none;
+      animation: fadeUp 0.35s ease;
+    }
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0.3; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === 公用组件 === */
     .hero {
       display: flex;
       flex-wrap: wrap;
@@ -107,7 +126,6 @@
       backdrop-filter: blur(2px);
       border: 1px solid #ffd9e3;
     }
-
     .avatar {
       flex-shrink: 0;
       width: 110px;
@@ -121,25 +139,14 @@
       color: white;
       box-shadow: 0 12px 18px rgba(255, 100, 130, 0.3);
       border: 4px solid #fff5f7;
-      transition: 0.2s;
     }
-    .avatar i {
-      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
-    }
-
-    .hero-text {
-      flex: 1;
-    }
+    .hero-text { flex: 1; }
     .hero-text h1 {
       font-size: 2.2rem;
       font-weight: 700;
       color: #4f2e3a;
-      letter-spacing: -0.3px;
     }
-    .hero-text h1 i {
-      color: #f28b9e;
-      margin-right: 8px;
-    }
+    .hero-text h1 i { color: #f28b9e; margin-right: 8px; }
     .hero-text .tagline {
       font-size: 1.1rem;
       background: #ffeef2;
@@ -150,25 +157,22 @@
       color: #954f64;
       font-weight: 600;
       border: 1px solid #ffd2de;
-      backdrop-filter: blur(2px);
     }
     .hero-text p {
       margin-top: 12px;
       color: #5d424b;
       font-weight: 500;
-      font-size: 1rem;
       background: rgba(255, 255, 255, 0.5);
       padding: 0.4rem 1rem;
       border-radius: 30px;
       display: inline-block;
     }
 
-    /* ===== 博客文章网格 ===== */
     .section-title {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 2.2rem 0 1.5rem 0;
+      margin: 2rem 0 1.5rem 0;
     }
     .section-title i {
       font-size: 2rem;
@@ -178,7 +182,6 @@
       font-size: 1.9rem;
       font-weight: 700;
       color: #482e36;
-      letter-spacing: -0.3px;
     }
     .section-title span {
       background: #ffd9e3;
@@ -192,11 +195,10 @@
 
     .post-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 1.8rem;
       margin-bottom: 2.5rem;
     }
-
     .post-card {
       background: rgba(255, 250, 251, 0.7);
       backdrop-filter: blur(2px);
@@ -212,9 +214,7 @@
       transform: translateY(-6px) scale(1.01);
       border-color: #fbb0c5;
       box-shadow: 0 20px 28px rgba(255, 130, 165, 0.25);
-      background: rgba(255, 245, 248, 0.9);
     }
-
     .post-category {
       display: inline-block;
       background: #ffe2ec;
@@ -223,40 +223,27 @@
       font-size: 0.75rem;
       font-weight: 700;
       color: #b34d67;
-      letter-spacing: 0.3px;
       align-self: flex-start;
       margin-bottom: 10px;
       border: 1px solid #ffc4d4;
     }
-
     .post-card h3 {
       font-size: 1.3rem;
       font-weight: 700;
       color: #39262d;
       margin-bottom: 6px;
-      line-height: 1.3;
     }
-    .post-card h3 i {
-      color: #e2738f;
-      margin-right: 6px;
-      font-size: 1rem;
-    }
-
+    .post-card h3 i { color: #e2738f; margin-right: 6px; }
     .post-meta {
       font-size: 0.85rem;
       color: #896a74;
       display: flex;
-      align-items: center;
       gap: 12px;
       margin: 6px 0 12px 0;
       border-top: 1px dashed #fccfd9;
       padding-top: 8px;
     }
-    .post-meta i {
-      color: #db7f96;
-      width: 18px;
-    }
-
+    .post-meta i { color: #db7f96; width: 18px; }
     .post-excerpt {
       color: #523e45;
       font-weight: 500;
@@ -265,7 +252,6 @@
       flex: 1;
       margin-bottom: 12px;
     }
-
     .read-more {
       text-decoration: none;
       font-weight: 700;
@@ -281,20 +267,14 @@
       align-items: center;
       gap: 6px;
     }
-    .read-more i {
-      font-size: 0.8rem;
-    }
     .read-more:hover {
       background: #ffcbd9;
       color: #872f4b;
       border-color: #e68a9e;
-      box-shadow: 0 4px 8px rgba(255, 100, 130, 0.2);
     }
 
-    /* ===== 侧边栏 / 个人简介卡片 ===== */
     .profile-side {
       background: rgba(255, 240, 244, 0.6);
-      backdrop-filter: blur(2px);
       border-radius: 50px 20px 50px 20px;
       padding: 1.5rem 2rem;
       margin: 1.8rem 0 2rem 0;
@@ -318,10 +298,7 @@
       border-radius: 30px;
       box-shadow: 0 4px 8px rgba(255, 120, 150, 0.15);
     }
-    .profile-side .info .bio {
-      font-weight: 600;
-      color: #452e36;
-    }
+    .profile-side .info .bio { font-weight: 600; color: #452e36; }
     .profile-side .info .bio span {
       background: #ffdae4;
       padding: 0.1rem 1rem;
@@ -350,17 +327,14 @@
     .social-icons a:hover {
       color: #c44e6b;
       background: #ffe3ec;
-      transform: scale(1.08) rotate(-2deg);
-      border-color: #f28b9e;
+      transform: scale(1.08);
     }
 
-    /* ===== 页脚 ===== */
     .footer {
       margin-top: 2.2rem;
       text-align: center;
       color: #906a76;
       font-weight: 600;
-      font-size: 0.95rem;
       border-top: 3px dashed #ffd3de;
       padding-top: 1.8rem;
       display: flex;
@@ -368,10 +342,7 @@
       justify-content: space-between;
       align-items: center;
     }
-    .footer i {
-      color: #e2738f;
-      margin: 0 6px;
-    }
+    .footer i { color: #e2738f; margin: 0 6px; }
     .footer .heart {
       color: #f45b7a;
       animation: beat 1.8s infinite;
@@ -381,14 +352,71 @@
       50% { transform: scale(1.2); }
     }
 
-    /* 小屏适配 */
+    /* === 标签页 & 关于页 专属 === */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      background: rgba(255, 240, 244, 0.4);
+      padding: 1.8rem 2rem;
+      border-radius: 60px;
+      border: 2px solid #ffd9e3;
+      margin-bottom: 2rem;
+    }
+    .tag-cloud a {
+      text-decoration: none;
+      background: white;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #954f64;
+      border: 1px solid #ffc9d7;
+      transition: 0.15s;
+      box-shadow: 0 2px 6px rgba(255, 150, 180, 0.1);
+    }
+    .tag-cloud a:hover {
+      background: #ffdee9;
+      transform: scale(1.05);
+      border-color: #f28b9e;
+    }
+    .tag-cloud a i { margin-right: 6px; color: #d96f88; }
+
+    .about-card {
+      background: rgba(255, 248, 250, 0.5);
+      border-radius: 50px;
+      padding: 2rem 2.5rem;
+      border: 2px solid #ffdae4;
+      backdrop-filter: blur(2px);
+      margin-bottom: 1.5rem;
+    }
+    .about-card h3 {
+      font-size: 1.8rem;
+      color: #402a31;
+      margin-bottom: 1rem;
+    }
+    .about-card h3 i { color: #e2738f; margin-right: 10px; }
+    .about-card p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #4d3840;
+      font-weight: 500;
+    }
+    .about-card .highlight {
+      background: #ffe2ec;
+      border-radius: 30px;
+      padding: 0.1rem 1rem;
+      display: inline-block;
+    }
+
+    /* 响应式 */
     @media (max-width: 650px) {
       .blog-card { padding: 1.5rem; }
       .hero { flex-direction: column; text-align: center; border-radius: 50px; padding: 1.8rem; }
       .hero-text h1 { font-size: 1.8rem; }
       .profile-side { flex-direction: column; gap: 1rem; align-items: flex-start; }
       .social-icons { align-self: center; }
-      .nav-links { gap: 0.8rem; margin-top: 0.4rem; }
+      .nav-links { gap: 0.3rem; }
+      .nav-links a { font-size: 0.95rem; padding: 0.3rem 0.8rem; }
     }
     @media (max-width: 450px) {
       .post-grid { grid-template-columns: 1fr; }
@@ -399,153 +427,207 @@
 <body>
 <div class="blog-card">
 
-  <!-- 导航栏 -->
+  <!-- 导航 -->
   <nav class="navbar">
-    <div class="logo">
-      <i class="fas fa-cat"></i> 小糖·窝
-    </div>
+    <div class="logo"><i class="fas fa-cat"></i> 小糖·窝</div>
     <div class="nav-links">
-      <a href="#"><i class="fas fa-house"></i> 首页</a>
-      <a href="#"><i class="fas fa-pen-fancy"></i> 文章</a>
-      <a href="#"><i class="fas fa-tag"></i> 标签</a>
-      <a href="#"><i class="fas fa-heart"></i> 关于</a>
+      <a href="#" class="active" data-page="home"><i class="fas fa-house"></i> 首页</a>
+      <a href="#" data-page="posts"><i class="fas fa-pen-fancy"></i> 文章</a>
+      <a href="#" data-page="tags"><i class="fas fa-tag"></i> 标签</a>
+      <a href="#" data-page="about"><i class="fas fa-heart"></i> 关于</a>
     </div>
   </nav>
 
-  <!-- 头部 hero -->
-  <div class="hero">
-    <div class="avatar">
-      <i class="fas fa-paw"></i>
-    </div>
-    <div class="hero-text">
-      <h1><i class="fas fa-star"></i> 奶油小星</h1>
-      <div class="tagline"><i class="fas fa-cloud-sun"></i> 今天也是软糯的一天</div>
-      <p><i class="fas fa-map-pin"></i> 记录日常 · 分享可爱</p>
-    </div>
-  </div>
-
-  <!-- 文章区域 -->
-  <div class="section-title">
-    <i class="fas fa-pencil-alt"></i>
-    <h2>最新小记</h2>
-    <span>🍰 6 篇</span>
-  </div>
-
-  <div class="post-grid">
-    <!-- 卡片 1 -->
-    <div class="post-card">
-      <span class="post-category"><i class="fas fa-cookie"></i> 日常</span>
-      <h3><i class="fas fa-mug-saucer"></i> 下午茶与云朵</h3>
-      <div class="post-meta">
-        <span><i class="far fa-calendar"></i> 2026-06-27</span>
-        <span><i class="far fa-comment"></i> 12</span>
+  <!-- ============ 页面：首页 ============ -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div class="avatar"><i class="fas fa-paw"></i></div>
+      <div class="hero-text">
+        <h1><i class="fas fa-star"></i> 奶油小星</h1>
+        <div class="tagline"><i class="fas fa-cloud-sun"></i> 今天也是软糯的一天</div>
+        <p><i class="fas fa-map-pin"></i> 记录日常 · 分享可爱</p>
       </div>
-      <div class="post-excerpt">
-        今天烤了奶油曲奇，配着蜜桃乌龙，窗外的云像棉花糖一样软。生活需要一点甜～
-      </div>
-      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
     </div>
 
-    <!-- 卡片 2 -->
-    <div class="post-card">
-      <span class="post-category"><i class="fas fa-palette"></i> 手作</span>
-      <h3><i class="fas fa-scroll"></i> 拼贴诗·春日</h3>
-      <div class="post-meta">
-        <span><i class="far fa-calendar"></i> 2026-06-24</span>
-        <span><i class="far fa-comment"></i> 8</span>
+    <div class="section-title">
+      <i class="fas fa-pencil-alt"></i>
+      <h2>最新小记</h2>
+      <span>🍰 6 篇</span>
+    </div>
+    <div class="post-grid">
+      <!-- 卡片 1 -->
+      <div class="post-card">
+        <span class="post-category"><i class="fas fa-cookie"></i> 日常</span>
+        <h3><i class="fas fa-mug-saucer"></i> 下午茶与云朵</h3>
+        <div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-27</span><span><i class="far fa-comment"></i> 12</span></div>
+        <div class="post-excerpt">今天烤了奶油曲奇，配着蜜桃乌龙，窗外的云像棉花糖一样软。</div>
+        <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="post-excerpt">
-        用旧杂志和干花做了一页拼贴诗，粉色和绿色撞在一起，是春天打翻的调色盘。
+      <div class="post-card">
+        <span class="post-category"><i class="fas fa-palette"></i> 手作</span>
+        <h3><i class="fas fa-scroll"></i> 拼贴诗·春日</h3>
+        <div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-24</span><span><i class="far fa-comment"></i> 8</span></div>
+        <div class="post-excerpt">用旧杂志和干花做了一页拼贴诗，粉色和绿色撞在一起，是春天打翻的调色盘。</div>
+        <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
       </div>
-      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+      <div class="post-card">
+        <span class="post-category"><i class="fas fa-cat"></i> 萌宠</span>
+        <h3><i class="fas fa-cat"></i> 橘子今天打哈欠</h3>
+        <div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-20</span><span><i class="far fa-comment"></i> 24</span></div>
+        <div class="post-excerpt">我家橘猫「年糕」又占领了我的键盘，还打了一个超级大的哈欠。</div>
+        <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
 
-    <!-- 卡片 3 -->
-    <div class="post-card">
-      <span class="post-category"><i class="fas fa-cat"></i> 萌宠</span>
-      <h3><i class="fas fa-cat"></i> 橘子今天打哈欠</h3>
-      <div class="post-meta">
-        <span><i class="far fa-calendar"></i> 2026-06-20</span>
-        <span><i class="far fa-comment"></i> 24</span>
-      </div>
-      <div class="post-excerpt">
-        我家橘猫「年糕」又占领了我的键盘，还打了一个超级大的哈欠，萌化了！🐾
-      </div>
-      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <!-- 卡片 4 -->
-    <div class="post-card">
-      <span class="post-category"><i class="fas fa-book-open"></i> 读书</span>
-      <h3><i class="fas fa-feather"></i> 翻开《小王子》</h3>
-      <div class="post-meta">
-        <span><i class="far fa-calendar"></i> 2026-06-16</span>
-        <span><i class="far fa-comment"></i> 15</span>
-      </div>
-      <div class="post-excerpt">
-        “如果你驯养了我，我们就会彼此需要。” 每次读都有新的感动，玫瑰与狐狸。
-      </div>
-      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <!-- 卡片 5 -->
-    <div class="post-card">
-      <span class="post-category"><i class="fas fa-music"></i> 音乐</span>
-      <h3><i class="fas fa-headphones"></i> 初夏歌单</h3>
-      <div class="post-meta">
-        <span><i class="far fa-calendar"></i> 2026-06-10</span>
-        <span><i class="far fa-comment"></i> 9</span>
-      </div>
-      <div class="post-excerpt">
-        收录了十首轻快又带点慵懒的曲子，适合在傍晚骑车或者发呆时听。🎶
-      </div>
-      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <!-- 卡片 6 -->
-    <div class="post-card">
-      <span class="post-category"><i class="fas fa-camera"></i> 摄影</span>
-      <h3><i class="fas fa-image"></i> 收集粉色黄昏</h3>
-      <div class="post-meta">
-        <span><i class="far fa-calendar"></i> 2026-06-05</span>
-        <span><i class="far fa-comment"></i> 31</span>
-      </div>
-      <div class="post-excerpt">
-        连续一周的粉色晚霞，像是天空在喝草莓奶昔。用镜头留住这些温柔时刻。
-      </div>
-      <a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </div>
-
-  <!-- 侧边简介 / 社交 -->
-  <div class="profile-side">
-    <div class="info">
-      <i class="fas fa-otter"></i>
-      <div class="bio">
-        一只住在云端的博客小狸 <span>🐾 日常可爱</span>
-        <div style="font-weight: 400; font-size:0.9rem; margin-top: 4px;">
-          <i class="fas fa-map-marker-alt" style="color:#d46b83;"></i> 彩虹糖星球 · 下午茶区
+    <div class="profile-side">
+      <div class="info">
+        <i class="fas fa-otter"></i>
+        <div class="bio">一只住在云端的博客小狸 <span>🐾 日常可爱</span>
+          <div style="font-weight:400;font-size:0.9rem;margin-top:4px;"><i class="fas fa-map-marker-alt" style="color:#d46b83;"></i> 彩虹糖星球 · 下午茶区</div>
         </div>
       </div>
-    </div>
-    <div class="social-icons">
-      <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
-      <a href="#" aria-label="小红书"><i class="fab fa-xiaohongshu"></i></a>
-      <a href="#" aria-label="bilibili"><i class="fab fa-bilibili"></i></a>
-      <a href="#" aria-label="github"><i class="fab fa-github"></i></a>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-weibo"></i></a>
+        <a href="#"><i class="fab fa-xiaohongshu"></i></a>
+        <a href="#"><i class="fab fa-bilibili"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
     </div>
   </div>
 
-  <!-- 页脚 -->
+  <!-- ============ 页面：文章 ============ -->
+  <div id="page-posts" class="page">
+    <div class="section-title">
+      <i class="fas fa-pen-fancy"></i>
+      <h2>全部文章</h2>
+      <span>📚 6 篇</span>
+    </div>
+    <div class="post-grid">
+      <div class="post-card"><span class="post-category"><i class="fas fa-cookie"></i> 日常</span><h3><i class="fas fa-mug-saucer"></i> 下午茶与云朵</h3><div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-27</span><span><i class="far fa-comment"></i> 12</span></div><div class="post-excerpt">今天烤了奶油曲奇，配着蜜桃乌龙，窗外的云像棉花糖一样软。</div><a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a></div>
+      <div class="post-card"><span class="post-category"><i class="fas fa-palette"></i> 手作</span><h3><i class="fas fa-scroll"></i> 拼贴诗·春日</h3><div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-24</span><span><i class="far fa-comment"></i> 8</span></div><div class="post-excerpt">用旧杂志和干花做了一页拼贴诗，粉色和绿色撞在一起，是春天打翻的调色盘。</div><a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a></div>
+      <div class="post-card"><span class="post-category"><i class="fas fa-cat"></i> 萌宠</span><h3><i class="fas fa-cat"></i> 橘子今天打哈欠</h3><div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-20</span><span><i class="far fa-comment"></i> 24</span></div><div class="post-excerpt">我家橘猫「年糕」又占领了我的键盘，还打了一个超级大的哈欠。</div><a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a></div>
+      <div class="post-card"><span class="post-category"><i class="fas fa-book-open"></i> 读书</span><h3><i class="fas fa-feather"></i> 翻开《小王子》</h3><div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-16</span><span><i class="far fa-comment"></i> 15</span></div><div class="post-excerpt">“如果你驯养了我，我们就会彼此需要。” 每次读都有新的感动。</div><a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a></div>
+      <div class="post-card"><span class="post-category"><i class="fas fa-music"></i> 音乐</span><h3><i class="fas fa-headphones"></i> 初夏歌单</h3><div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-10</span><span><i class="far fa-comment"></i> 9</span></div><div class="post-excerpt">收录了十首轻快又带点慵懒的曲子，适合在傍晚骑车或者发呆时听。</div><a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a></div>
+      <div class="post-card"><span class="post-category"><i class="fas fa-camera"></i> 摄影</span><h3><i class="fas fa-image"></i> 收集粉色黄昏</h3><div class="post-meta"><span><i class="far fa-calendar"></i> 2026-06-05</span><span><i class="far fa-comment"></i> 31</span></div><div class="post-excerpt">连续一周的粉色晚霞，像是天空在喝草莓奶昔。用镜头留住这些温柔时刻。</div><a href="#" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a></div>
+    </div>
+    <!-- 重复一次侧边栏，保持风格统一 -->
+    <div class="profile-side" style="margin-top:0.5rem;">
+      <div class="info"><i class="fas fa-pen-nib"></i><div class="bio">✍️ 目前共 6 篇小记 · 持续更新中</div></div>
+      <div style="font-size:1rem; color:#a35f73;"><i class="fas fa-heart" style="color:#f45b7a;"></i> 感谢阅读</div>
+    </div>
+  </div>
+
+  <!-- ============ 页面：标签 ============ -->
+  <div id="page-tags" class="page">
+    <div class="section-title">
+      <i class="fas fa-tags"></i>
+      <h2>标签云</h2>
+      <span>🌸 所有分类</span>
+    </div>
+    <div class="tag-cloud">
+      <a href="#"><i class="fas fa-cookie"></i> 日常 (3)</a>
+      <a href="#"><i class="fas fa-palette"></i> 手作 (2)</a>
+      <a href="#"><i class="fas fa-cat"></i> 萌宠 (4)</a>
+      <a href="#"><i class="fas fa-book-open"></i> 读书 (2)</a>
+      <a href="#"><i class="fas fa-music"></i> 音乐 (1)</a>
+      <a href="#"><i class="fas fa-camera"></i> 摄影 (3)</a>
+      <a href="#"><i class="fas fa-utensils"></i> 美食 (2)</a>
+      <a href="#"><i class="fas fa-paw"></i> 日常碎片 (5)</a>
+      <a href="#"><i class="fas fa-cloud-sun"></i> 天气 (1)</a>
+      <a href="#"><i class="fas fa-feather"></i> 随笔 (3)</a>
+    </div>
+    <div class="about-card" style="margin-top:0.5rem;">
+      <h3><i class="fas fa-info-circle"></i> 标签说明</h3>
+      <p>点击标签可以筛选相关文章（演示交互）。这里展示所有文章分类，方便你快速找到感兴趣的内容。每个标签后的数字代表文章数量。</p>
+    </div>
+    <!-- 社交栏复用 -->
+    <div class="profile-side">
+      <div class="info"><i class="fas fa-hashtag"></i><div class="bio">🏷️ 用标签记录生活点滴</div></div>
+      <div class="social-icons"><a href="#"><i class="fab fa-weibo"></i></a><a href="#"><i class="fab fa-xiaohongshu"></i></a></div>
+    </div>
+  </div>
+
+  <!-- ============ 页面：关于 ============ -->
+  <div id="page-about" class="page">
+    <div class="section-title">
+      <i class="fas fa-heart"></i>
+      <h2>关于我</h2>
+      <span>✨ 奶油小星</span>
+    </div>
+    <div class="about-card">
+      <h3><i class="fas fa-otter"></i> 这里是「小糖·窝」</h3>
+      <p>你好呀！我是 <span class="highlight">奶油小星</span>，一个喜欢用文字和图片记录生活碎片的普通人。 🌟</p>
+      <p style="margin-top: 0.8rem;">这个博客诞生于 2026 年的夏天，灵感来自粉色晚霞和一杯热乎乎的蜜桃乌龙。我希望这里能像一个柔软的树洞，收藏日常里的可爱、温柔与小小的奇思妙想。</p>
+      <p style="margin-top: 0.8rem;"><i class="fas fa-paw" style="color:#e2738f;"></i> 目前住在彩虹糖星球 · 下午茶区，养了一只叫「年糕」的橘猫，喜欢手作、摄影、读书和一切毛茸茸的东西。</p>
+    </div>
+    <div class="about-card" style="background: rgba(255, 235, 240, 0.3);">
+      <h3><i class="fas fa-envelope"></i> 联系我</h3>
+      <p><i class="fas fa-envelope" style="color:#d96f88;"></i> 邮箱：candy@xiaotang.blog</p>
+      <p><i class="fas fa-cat"></i> 社交：@奶油小星 在 微博/小红书/B站 都可以找到我～</p>
+      <p style="margin-top: 0.6rem;">💌 欢迎留言或者给我写信，分享你的可爱日常！</p>
+    </div>
+    <!-- 社交 -->
+    <div class="profile-side">
+      <div class="info"><i class="fas fa-address-card"></i><div class="bio">📮 随时找我玩</div></div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-weibo"></i></a>
+        <a href="#"><i class="fab fa-xiaohongshu"></i></a>
+        <a href="#"><i class="fab fa-bilibili"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚（所有页面共用） -->
   <div class="footer">
     <span><i class="fas fa-copyright"></i> 2026 小糖博客 · 用 <i class="fas fa-mug-hot"></i> 和 <i class="fas fa-heart heart"></i> 搭建</span>
-    <span>
-      <i class="fas fa-tag"></i> 可爱至上 · 
-      <i class="fas fa-code"></i> 单页博客
-    </span>
+    <span><i class="fas fa-tag"></i> 可爱至上 · <i class="fas fa-code"></i> 单页四合一</span>
   </div>
-
 </div>
-<!-- 完 ～ 希望你喜欢这份可爱！ -->
+
+<!-- ===== 导航切换脚本 ===== -->
+<script>
+  (function() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const pages = {
+      home: document.getElementById('page-home'),
+      posts: document.getElementById('page-posts'),
+      tags: document.getElementById('page-tags'),
+      about: document.getElementById('page-about')
+    };
+
+    function switchPage(pageId) {
+      // 隐藏所有页面
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      // 显示目标页面
+      if (pages[pageId]) pages[pageId].classList.add('active');
+      // 更新导航激活样式
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.page === pageId) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const page = this.dataset.page;
+        if (page) switchPage(page);
+        // 如果是首页，直接切换（默认）
+      });
+    });
+
+    // 确保首页默认激活 (如果URL无hash)
+    if (!window.location.hash) {
+      switchPage('home');
+    } else {
+      // 简单hash支持
+      const hash = window.location.hash.replace('#', '');
+      if (pages[hash]) switchPage(hash);
+    }
+  })();
+</script>
 </body>
 </html>
