@@ -4,105 +4,74 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="description" content="林澈的个人博客 - 前端工程师 / 开源爱好者，关注 Web 性能、开发者体验与可视化。" />
   <title>林澈 · 个人博客</title>
-
-  <!-- 防止主题闪烁：在样式加载前同步设置主题 -->
   <script>
-    (function () {
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.style.colorScheme = theme;
+    (function(){
+      var s = localStorage.getItem('theme');
+      var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var t = s || (d ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.style.colorScheme = t;
     })();
   </script>
-
-  <!-- Remix Icon CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet">
-
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
   <style>
-    /* ========== CSS 变量：语义化色彩体系 ========== */
     :root {
       color-scheme: light;
       --bg: #f5f7fb;
-      --surface: #ffffff;
+      --surface: #fff;
       --surface-soft: #eef2f8;
       --text: # 012172a;
-      --text-muted: # 05a6478;
+      --muted: #5a6478;
       --accent: # 0077ff;
       --accent-soft: rgba(0, 119, 255, 0.12);
       --border: #dce3ee;
       --glow: 0 0 18px rgba(0, 119, 255, 0.18);
-      --shadow-card: 0 8px 30px rgba(18, 23, 42, 0.08);
+      --shadow: 0 8px 30px rgba(18, 23, 42, 0.08);
       --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       --mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
     }
-
     [data-theme="dark"] {
       color-scheme: dark;
       --bg: # 0a0a12;
       --surface: # 012121f;
       --surface-soft: # 01a1a2e;
       --text: #e8e8f0;
-      --text-muted: # 08a8aa3;
+      --muted: # 08a8aa3;
       --accent: # 022d3ee;
       --accent-soft: rgba(34, 211, 238, 0.12);
       --border: # 026263d;
       --glow: 0 0 22px rgba(34, 211, 238, 0.28);
-      --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.45);
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
     }
-
-    /* ========== 基础重置与排版 ========== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
-      transition: background 0.25s ease, color 0.25s ease;
-      min-height: 100vh;
+      transition: background 0.25s, color 0.25s;
     }
-
-    button,
-    input,
-    select,
-    textarea {
+    button {
       font: inherit;
       cursor: pointer;
-    }
-
-    button {
       background: none;
       border: none;
-      padding: 0;
       color: inherit;
     }
-
     a {
       color: inherit;
       text-decoration: none;
-      outline: none;
     }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* ========== 布局容器 ========== */
     .wrap {
       max-width: 860px;
       margin: 0 auto;
       padding: 0 20px;
     }
-
-    /* ========== 头部导航 ========== */
     header {
       position: sticky;
       top: 0;
@@ -111,46 +80,37 @@
       background: color-mix(in srgb, var(--bg) 80%, transparent);
       border-bottom: 1px solid var(--border);
     }
-
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 56px;
     }
-
     .brand {
       font-weight: 800;
       font-size: 17px;
       letter-spacing: 0.04em;
     }
-
     .brand span {
       color: var(--accent);
     }
-
     nav {
       display: flex;
       gap: 18px;
       align-items: center;
     }
-
     nav a {
       font-size: 14px;
-      color: var(--text-muted);
-      transition: color 0.2s ease;
+      color: var(--muted);
+      transition: color 0.2s;
     }
-
-    nav a:hover,
-    nav a.active {
+    nav a:hover {
       color: var(--accent);
     }
-
     .actions {
       display: flex;
       gap: 6px;
     }
-
     .icon-btn {
       width: 34px;
       height: 34px;
@@ -158,39 +118,35 @@
       display: grid;
       place-items: center;
       font-size: 17px;
-      color: var(--text-muted);
-      transition: 0.2s ease;
+      color: var(--muted);
+      transition: 0.2s;
     }
-
     .icon-btn:hover {
       color: var(--accent);
       background: var(--accent-soft);
     }
-
-    /* 主题图标切换 */
-    [data-theme="light"] .icon-moon { display: none; }
-    [data-theme="dark"] .icon-sun { display: none; }
-
-    /* ========== 英雄区域 ========== */
+    [data-theme="light"] .icon-moon {
+      display: none;
+    }
+    [data-theme="dark"] .icon-sun {
+      display: none;
+    }
     .hero {
       padding: 72px 0 56px;
       position: relative;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
       background-size: 48px 48px;
       opacity: 0.35;
       mask-image: linear-gradient(180deg, # 000, transparent 85%);
     }
-
     .hero h1 {
       font-size: clamp(32px, 6vw, 52px);
       font-weight: 900;
@@ -198,35 +154,29 @@
       line-height: 1.15;
       position: relative;
     }
-
     .hero h1 em {
       font-style: normal;
       color: var(--accent);
       text-shadow: 0 0 10px var(--accent), 0 0 30px var(--accent-soft);
     }
-
     .hero .role {
       font-family: var(--mono);
       font-size: 13px;
       color: var(--accent);
       margin-top: 16px;
       letter-spacing: 0.06em;
-      text-transform: uppercase;
     }
-
     .hero p {
       max-width: 560px;
       margin-top: 14px;
-      color: var(--text-muted);
+      color: var(--muted);
       font-size: 15px;
     }
-
     .socials {
       display: flex;
       gap: 10px;
       margin-top: 24px;
     }
-
     .socials a {
       width: 38px;
       height: 38px;
@@ -234,21 +184,17 @@
       border-radius: 10px;
       display: grid;
       place-items: center;
-      color: var(--text-muted);
-      transition: 0.2s ease;
+      color: var(--muted);
+      transition: 0.2s;
     }
-
     .socials a:hover {
       color: var(--accent);
       border-color: var(--accent);
       box-shadow: var(--glow);
     }
-
-    /* ========== 通用区块 ========== */
     section {
       padding: 48px 0;
     }
-
     .section-label {
       font-family: var(--mono);
       font-size: 11px;
@@ -257,37 +203,30 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-
     h2 {
       font-size: 22px;
       font-weight: 800;
       margin-bottom: 20px;
       letter-spacing: -0.01em;
     }
-
-    /* ========== 卡片组件 ========== */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 22px;
-      transition: 0.25s ease;
+      transition: 0.25s;
     }
-
     .card:hover {
       border-color: var(--accent);
-      box-shadow: var(--glow), var(--shadow-card);
+      box-shadow: var(--glow), var(--shadow);
       transform: translateY(-2px);
     }
-
-    /* ========== 技能标签 ========== */
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 16px;
     }
-
     .tag {
       font-family: var(--mono);
       font-size: 11px;
@@ -296,68 +235,42 @@
       background: var(--accent-soft);
       color: var(--accent);
     }
-
-    /* ========== 文章列表 ========== */
     .post-grid {
       display: grid;
       gap: 14px;
     }
-
     .post-meta {
       font-family: var(--mono);
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--muted);
       margin-bottom: 6px;
     }
-
     .post-title {
       font-size: 16px;
       font-weight: 700;
-      transition: color 0.2s ease;
+      transition: color 0.2s;
     }
-
     .card:hover .post-title {
       color: var(--accent);
     }
-
-    /* ========== 页脚 ========== */
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 0;
       margin-top: 24px;
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--muted);
       font-family: var(--mono);
-      text-align: center;
     }
-
-    /* ========== 响应式设计 ========== */
     @media (max-width: 560px) {
-      nav a:not(:first-child) {
+      nav a {
         display: none;
       }
       .hero {
         padding: 52px 0 40px;
       }
-      .actions {
-        gap: 8px;
-      }
-      .icon-btn {
-        width: 36px;
-        height: 36px;
-      }
-      .socials a {
-        width: 36px;
-        height: 36px;
-      }
     }
-
-    /* ========== 可访问性：减少动画 ========== */
     @media (prefers-reduced-motion: reduce) {
-      *,
-      .card,
-      button,
-      a {
+      * {
         transition: none !important;
         animation: none !important;
       }
@@ -365,7 +278,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="wrap header-inner">
       <div class="brand">林澈<span>.</span></div>
@@ -389,7 +301,7 @@
   <main class="wrap">
     <section class="hero">
       <h1>
-        <em data-i18n="hero.name">林澈</em><br>
+        <em data-i18n="hero.name">林澈</em><br />
         <span data-i18n="hero.role">前端工程师 / 开源爱好者</span>
       </h1>
       <p data-i18n="hero.desc">关注 Web 性能、开发者体验与可视化。</p>
@@ -401,7 +313,7 @@
     </section>
 
     <section id="about">
-      <div class="section-label">01 / <span data-i18n="section.about">About</span></div>
+      <div class="section-label">01 / About</div>
       <h2 data-i18n="about.title">关于我</h2>
       <div class="card">
         <p data-i18n="about.body">我是一名专注于前端工程与体验的开发者，喜欢把复杂问题拆解成简单的界面。</p>
@@ -410,37 +322,12 @@
           <span class="tag">CSS</span>
           <span class="tag">性能优化</span>
           <span class="tag">可视化</span>
-          <span class="tag">React</span>
-          <span class="tag">Node.js</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="timeline">
-      <div class="section-label">02 / <span data-i18n="section.timeline">Timeline</span></div>
-      <h2 data-i18n="timeline.title">成长历程</h2>
-      <div class="post-grid">
-        <div class="card">
-          <div class="post-meta">2026</div>
-          <div class="post-title" data-i18n="timeline.2026">发布开源组件库 DesignKit</div>
-        </div>
-        <div class="card">
-          <div class="post-meta">2025</div>
-          <div class="post-title" data-i18n="timeline.2025">加入 TechFront 团队，主导性能监控项目</div>
-        </div>
-        <div class="card">
-          <div class="post-meta">2023</div>
-          <div class="post-title" data-i18n="timeline.2023">全栈开发首个个人博客系统</div>
-        </div>
-        <div class="card">
-          <div class="post-meta">2021</div>
-          <div class="post-title" data-i18n="timeline.2021">计算机专业毕业，正式成为前端工程师</div>
         </div>
       </div>
     </section>
 
     <section id="posts">
-      <div class="section-label">03 / <span data-i18n="section.posts">Writing</span></div>
+      <div class="section-label">02 / Writing</div>
       <h2 data-i18n="posts.title">最近文章</h2>
       <div class="post-grid">
         <article class="card">
@@ -451,10 +338,6 @@
           <div class="post-meta" data-i18n="post.2.meta">2026-09 · 性能</div>
           <div class="post-title" data-i18n="post.2.title">首屏无闪烁主题切换的完整方案</div>
         </article>
-        <article class="card">
-          <div class="post-meta" data-i18n="post.3.meta">2026-08 · 可视化</div>
-          <div class="post-title" data-i18n="post.3.title">用 Canvas 实现粒子动效的技术解析</div>
-        </article>
       </div>
     </section>
   </main>
@@ -464,7 +347,7 @@
   </footer>
 
   <script>
-    /* ==================== 国际化系统 ==================== */
+    /* ---------- I18N ---------- */
     const I18N = {
       Zh: {
         'nav.about': '关于',
@@ -473,23 +356,13 @@
         'hero.name': '林澈',
         'hero.role': '前端工程师 / 开源爱好者',
         'hero.desc': '关注 Web 性能、开发者体验与可视化。',
-        'section.about': 'About',
-        'section.timeline': 'Timeline',
-        'section.posts': 'Writing',
         'about.title': '关于我',
         'about.body': '我是一名专注于前端工程与体验的开发者，喜欢把复杂问题拆解成简单的界面。',
-        'timeline.title': '成长历程',
-        'timeline.2026': '发布开源组件库 DesignKit',
-        'timeline.2025': '加入 TechFront 团队，主导性能监控项目',
-        'timeline.2023': '全栈开发首个个人博客系统',
-        'timeline.2021': '计算机专业毕业，正式成为前端工程师',
         'posts.title': '最近文章',
         'post.1.meta': '2026-10 · 工程化',
         'post.1.title': 'CSS 容器查询的落地实践',
         'post.2.meta': '2026-09 · 性能',
         'post.2.title': '首屏无闪烁主题切换的完整方案',
-        'post.3.meta': '2026-08 · 可视化',
-        'post.3.title': '用 Canvas 实现粒子动效的技术解析',
         'lang.label': 'EN'
       },
       En: {
@@ -499,23 +372,13 @@
         'hero.name': 'Lin Che',
         'hero.role': 'Frontend Engineer / OSS Enthusiast',
         'hero.desc': 'Web performance, developer experience, and visualization.',
-        'section.about': 'About',
-        'section.timeline': 'Timeline',
-        'section.posts': 'Writing',
-        'about.title': 'About Me',
-        'about.body': 'I am a frontend engineer focused on building scalable systems and great user experiences.',
-        'timeline.title': 'Journey',
-        'timeline.2026': 'Released open-source component library DesignKit',
-        'timeline.2025': 'Joined TechFront team, led performance monitoring project',
-        'timeline.2023': 'Built my first full-stack blog system',
-        'timeline.2021': 'Graduated in Computer Science, became a frontend engineer',
+        'about.title': 'About',
+        'about.body': 'I build interfaces with a focus on frontend engineering and experience.',
         'posts.title': 'Recent Posts',
         'post.1.meta': 'Oct 2026 · Engineering',
         'post.1.title': 'Container Queries in Production',
         'post.2.meta': 'Sep 2026 · Performance',
         'post.2.title': 'A No-Flash Theme Toggle, End to End',
-        'post.3.meta': 'Aug 2026 · Visualization',
-        'post.3.title': 'Particle Animation with Canvas: Technical Deep Dive',
         'lang.label': '中'
       }
     };
@@ -525,16 +388,12 @@
     function applyLanguage(lang) {
       const dict = I18N[lang] || I18N.Zh;
       document.documentElement.lang = lang === 'Zh' ? 'zh-CN' : 'en';
-
-      // 更新 data-i18n 文本
+      
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
-        if (dict[key] !== undefined) {
-          el.textContent = dict[key];
-        }
+        if (dict[key] !== undefined) el.textContent = dict[key];
       });
 
-      // 更新语言切换按钮
       const langBtn = document.getElementById('langToggle');
       if (langBtn) {
         const label = dict['lang.label'];
@@ -551,7 +410,7 @@
       currentLang = lang;
     }
 
-    /* ==================== 主题系统 ==================== */
+    /* ---------- THEME ---------- */
     function syncThemeButton(theme) {
       const btn = document.getElementById('themeToggle');
       if (btn) {
@@ -559,12 +418,10 @@
       }
     }
 
-    function setTheme(theme, persist = true) {
+    function setTheme(theme, persist) {
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.style.colorScheme = theme;
-      if (persist) {
-        localStorage.setItem('theme', theme);
-      }
+      if (persist !== false) localStorage.setItem('theme', theme);
       syncThemeButton(theme);
     }
 
@@ -573,16 +430,12 @@
       setTheme(current === 'dark' ? 'light' : 'dark');
     }
 
-    /* ==================== 初始化 ==================== */
+    /* ---------- INIT ---------- */
     document.addEventListener('DOMContentLoaded', function () {
-      // 应用语言
       applyLanguage(currentLang);
-
-      // 初始化主题按钮状态
       const theme = document.documentElement.getAttribute('data-theme') || 'light';
       syncThemeButton(theme);
 
-      // 绑定事件
       document.getElementById('themeToggle').addEventListener('click', toggleTheme);
       document.getElementById('langToggle').addEventListener('click', function () {
         applyLanguage(currentLang === 'Zh' ? 'En' : 'Zh');
